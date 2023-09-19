@@ -29,7 +29,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.plarpoon = {
                 imports = [ ./bjorn/home.nix ];
-		home.stateVersion = "23.05";
+		home.stateVersion = "23.11";
               };
             }
           ];
@@ -43,7 +43,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.plarpoon = {
                 imports = [ ./daisy/home.nix ];
-		home.stateVersion = "23.05";
+		home.stateVersion = "23.11";
               };
             }
           ];

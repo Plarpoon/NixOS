@@ -1,13 +1,17 @@
 { pkgs, ... }:
 
 {
-  home = {                                # Specific packages for desktop
+  home = {
     packages = with pkgs; [
-      # Applications
-      steam           # Gaming store
-      vscode	      # IDE
-      discord	      # Comm application
+      # Generics
+      steam         # Gaming platform
       firefox	      # Web browser
+
+      # Comms
+      discord       # Chat
+
+      # Programming
+      vscode        # IDE
     ];
   };
 }
