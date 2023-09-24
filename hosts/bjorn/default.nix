@@ -50,7 +50,8 @@
     };
   };
 
-  hyprland.enable = true;                       # Window Manager
+  bjorn.enable = true;                       # Bjorn modules
+  kde.enable = true;                         # KDE DE
 
   environment = {
     systemPackages = with pkgs; [               # System-Wide Packages
