@@ -1,53 +1,36 @@
+#
+#  flake.nix *             
+#   └─  ./hosts
+#       └─ default.nix
+#
+
 {
-  description = "A flake containing all of my NixOS Configurations";
+  description = "NixOS Flake Configuration";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
+  inputs =                                                                  # References Used by Flake
+    {
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";                     # Stable Nix Packages (Default)
+      nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";         # Unstable Nix Packages
 
-  outputs = { self, nixpkgs, home-manager }:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
+      home-manager = {                                                      # User Environment Manager
+        url = "github:nix-community/home-manager/release-23.11";
+        inputs.nixpkgs.follows = "nixpkgs";
       };
-      lib = nixpkgs.lib;
+    };
+
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:   # Function telling flake which inputs to use
+    let
+      vars = {                                                              # Variables Used In Flake
+        user = "plarpoon";
+        editor = "nvim";
+      };
     in
     {
-      nixosConfigurations = {
-        bjorn = lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./bjorn/configuration.nix
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.plarpoon = {
-                imports = [ ./bjorn/home.nix ];
-		home.stateVersion = "23.11";
-              };
-            }
-          ];
-        };
-        daisy = lib.nixosSystem {
-          inherit system;
-	  modules = [
-            ./daisy/configuration.nix
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.plarpoon = {
-                imports = [ ./daisy/home.nix ];
-		home.stateVersion = "23.11";
-              };
-            }
-          ];
-        };
-      };
+      nixosConfigurations = (                                               # NixOS Configurations
+        import ./hosts {
+          inherit (nixpkgs) lib;
+          inherit inputs nixpkgs nixpkgs-unstable home-manager vars;   # Inherit inputs
+        }
+      );
     };
 }
