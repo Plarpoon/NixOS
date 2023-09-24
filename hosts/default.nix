@@ -27,7 +27,7 @@ let
   lib = nixpkgs.lib;
 in
 {
-  bjorn = lib.nixosSystem {                                # Laptop Profile
+  laptop = lib.nixosSystem {                                # Laptop Profile
     inherit system;
     specialArgs = {
       inherit inputs unstable vars;
@@ -38,7 +38,7 @@ in
       };
     };
     modules = [
-      ./bjorn
+      ./laptop
       ./configuration.nix
 
       home-manager.nixosModules.home-manager {
@@ -48,7 +48,7 @@ in
     ];
   };
 
-    daisy = lib.nixosSystem {                               # Desktop Profile 
+    desktop = lib.nixosSystem {                               # Desktop Profile 
     inherit system;
     specialArgs = {
       inherit inputs system unstable vars;
@@ -60,7 +60,7 @@ in
     };
     modules = [
       nur.nixosModules.nur
-      ./daisy
+      ./desktop
       ./configuration.nix
 
       home-manager.nixosModules.home-manager {

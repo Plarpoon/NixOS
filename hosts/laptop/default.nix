@@ -1,14 +1,14 @@
 #
-#  Specific system configuration settings for desktop
+#  Specific system configuration settings for laptop
 #
 #  flake.nix
 #   ├─ ./hosts
 #   │   ├─ default.nix
-#   │   └─ ./desktop
+#   │   └─ ./laptop
 #   │        ├─ default.nix *
 #   │        └─ hardware-configuration.nix
 #   └─ ./modules
-#       └─ ./desktops
+#       └─ ./laptop
 #           └─ default.nix
 #
 
@@ -50,8 +50,8 @@
     };
   };
 
-  bjorn.enable = true;                       # Bjorn modules
-  kde.enable = true;                         # KDE DE
+  laptop.enable = true;                       # Laptop modules
+  kde.enable = true;                          # KDE DE
 
   environment = {
     systemPackages = with pkgs; [               # System-Wide Packages
