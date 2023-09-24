@@ -21,6 +21,11 @@
         url = "github:nix-community/NUR";                                   # Requires "nur.nixosModules.nur" to be added to the host modules
       };
 
+      nixgl = {                                                             # Fixes OpenGL With Other Distros.
+        url = "github:guibou/nixGL";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
       plasma-manager = {                                                    # KDE Plasma User Settings Generator
         url = "github:pjones/plasma-manager";                               # Requires "inputs.plasma-manager.homeManagerModules.plasma-manager" to be added to the home-manager.users.${user}.imports
         inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +33,7 @@
       };
     };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nur, home-manager, ... }:   # Function telling flake which inputs to use
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nur, nixgl, home-manager, plasma-manager, ... }:   # Function telling flake which inputs to use
     let
       vars = {                                                              # Variables Used In Flake
         user = "plarpoon";
@@ -39,7 +44,13 @@
       nixosConfigurations = (                                               # NixOS Configurations
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nixpkgs-unstable home-manager nur vars;   # Inherit inputs
+          inherit inputs nixpkgs nixpkgs-unstable home-manager nur plasma-manager vars;   # Inherit inputs
+        }
+      );
+      homeConfigurations = (                                                # Nix Configurations
+        import ./nix {
+          inherit (nixpkgs) lib;
+          inherit inputs nixpkgs nixpkgs-unstable home-manager nixgl vars;
         }
       );
     };
