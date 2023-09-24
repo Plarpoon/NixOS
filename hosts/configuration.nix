@@ -105,6 +105,8 @@
       firefox           # Browser
       google-chrome     # Browser
       discord           # Messaging
+      vscode            # IDE
+      steam             # Game Store
 
       # File Management
       gnome.file-roller # Archive Manager
