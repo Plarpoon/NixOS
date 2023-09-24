@@ -59,4 +59,5 @@ with lib;
         enable = true;
       };
     };
+  };
 }

@@ -9,7 +9,7 @@
 #           └─ default.nix 
 #
 
-{ lib, inputs, nixpkgs, nixpkgs-unstable, home-manager, vars, ... }:
+{ lib, inputs, nixpkgs, nixpkgs-unstable, home-manager, nur, vars, ... }:
 
 let
   system = "x86_64-linux";                                  # System Architecture
