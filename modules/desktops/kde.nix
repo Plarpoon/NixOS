@@ -32,7 +32,7 @@ with lib;
 
         layout = "it";
         libinput.enable = true;
-
+        
         displayManager = {
           sddm.enable = true;                       # Display Manager
           defaultSession = "plasmawayland";
@@ -40,9 +40,6 @@ with lib;
         desktopManager.plasma5 = {
           enable = true;                            # Desktop Environment
           excludePackages = with pkgs.libsForQt5; [
-            elisa
-            khelpcenter
-            konsole
           ];
         };
       };
