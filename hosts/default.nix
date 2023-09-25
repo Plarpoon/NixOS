@@ -32,7 +32,7 @@ in
     specialArgs = {
       inherit inputs unstable vars;
       host = {
-        hostName = "bjorn";
+        hostName = "laptop";
         mainMonitor = "eDP-1";
         secondMonitor = "";
       };
@@ -53,7 +53,7 @@ in
     specialArgs = {
       inherit inputs system unstable vars;
       host = {
-        hostName = "daisy";
+        hostName = "desktop";
         mainMonitor = "DP-2";
         secondMonitor = "HDMI-1";
       };
