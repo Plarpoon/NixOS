@@ -4,7 +4,7 @@
 #  Get the plasma configs in a file with $ nix run github:pjones/plasma-manager > <file>
 #
 
-{ config, lib, pkgs, vars, ... }:
+{ config, lib, pkgs, vars, inputs, ... }:
 
 with lib;
 {
@@ -32,15 +32,13 @@ with lib;
 
         layout = "it";
         libinput.enable = true;
-        
+
         displayManager = {
           sddm.enable = true;                       # Display Manager
           defaultSession = "plasmawayland";
         };
         desktopManager.plasma5 = {
           enable = true;                            # Desktop Environment
-          excludePackages = with pkgs.libsForQt5; [
-          ];
         };
       };
     };
