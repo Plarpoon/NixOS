@@ -35,27 +35,30 @@
     };
   };
 
-  username = "plarpoon";
-  version = "23.11";
-
   outputs = { self, nixpkgs, home-manager, nur, nixgl, plasma-manager }: {
-    nixosConfigurations = {
-      bjorn = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/bjorn/default.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.users.${username} = import ./hosts/configuration.nix;
-            system.stateVersion = version;
-          }
-        ];
-      };
-      daisy = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/daisy/default.nix
-        ];
+    let
+      username = "plarpoon";
+      version = "23.11";
+    in
+    {
+      nixosConfigurations = {
+        bjorn = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/bjorn/default.nix
+            home-manager.nixosModules.home-manager
+            ({ config, pkgs, ... }: {
+              home-manager.users.${username} = import ./hosts/configuration.nix;
+              system.stateVersion = version;
+            })
+          ];
+        };
+        daisy = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/daisy/default.nix
+          ];
+        };
       };
     };
   };
