@@ -51,13 +51,13 @@
       bjorn = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          (import ./hosts/bjorn/default.nix { inherit self; })
+          (import ./hosts/bjorn/default.nix { inherit self nixpkgs; })
         ];
       };
       daisy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          (import ./hosts/daisy/default.nix { inherit self; })
+          (import ./hosts/daisy/default.nix { inherit self nixpkgs; })
         ];
       };
     };
