@@ -1,57 +1,65 @@
-#
-#  flake.nix *             
-#   └─  ./hosts
-#       └─ default.nix
-#
+/* 
+.
+├── flake.nix
+├── hosts
+│   ├── bjorn
+│   │   ├── default.nix
+│   │   └── hardware-configuration.nix
+│   ├── daisy
+│   │   ├── default.nix
+│   │   └── hardware-configuration.nix
+│   ├── default.nix
+│   └── configuration.nix
+└── modules
+    ├── desktop
+    │   ├── kde.nix
+    │   ├── gnome.nix
+    │   └── hyprland.nix
+    └── options.nix
+ */
 
 {
-  description = "NixOS Flake Configuration";
+  description = "A flake for my system configurations";
 
-  inputs =                                                                  # References Used by Flake
-    {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";                     # Stable Nix Packages (Default)
-      nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";         # Unstable Nix Packages
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nur.url = "github:nix-community/NUR";
+    nixgl.url = "github:guibou/nixGL";
+    plasma-manager = {
+      url = "github:ttuegel/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
-      home-manager = {                                                      # User Environment Manager
-        url = "github:nix-community/home-manager/release-23.11";
-        inputs.nixpkgs.follows = "nixpkgs";
+  outputs = { self, nixpkgs, home-manager, nur, nixgl, plasma-manager }: {
+    nixosConfigurations = {
+      plarpoon = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/default.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.users.plarpoon = import ./hosts/configuration.nix;
+            system.stateVersion = "23.11";  # Update this to the latest supported version
+          }
+        ];
       };
-
-      nur = {                                                               # NUR Community Packages
-        url = "github:nix-community/NUR";                                   # Requires "nur.nixosModules.nur" to be added to the host modules
+      bjorn = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/bjorn/default.nix
+        ];
       };
-
-      nixgl = {                                                             # Fixes OpenGL With Other Distros.
-        url = "github:guibou/nixGL";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
-      plasma-manager = {                                                    # KDE Plasma User Settings Generator
-        url = "github:pjones/plasma-manager";                               # Requires "inputs.plasma-manager.homeManagerModules.plasma-manager" to be added to the home-manager.users.${user}.imports
-        inputs.nixpkgs.follows = "nixpkgs";
-        inputs.home-manager.follows = "nixpkgs";
+      daisy = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/daisy/default.nix
+        ];
       };
     };
-
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nur, nixgl, home-manager, plasma-manager, ... }:   # Function telling flake which inputs to use
-    let
-      vars = {                                                              # Variables Used In Flake
-        user = "plarpoon";
-        editor = "nvim";
-      };
-    in
-    {
-      nixosConfigurations = (                                               # NixOS Configurations
-        import ./hosts {
-          inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nixpkgs-unstable home-manager nur plasma-manager vars;   # Inherit inputs
-        }
-      );
-      homeConfigurations = (                                                # Nix Configurations
-        import ./nix {
-          inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nixpkgs-unstable home-manager nixgl vars;
-        }
-      );
-    };
+  };
 }
