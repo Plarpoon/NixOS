@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, self, ... }:
 
 {
   boot.loader.systemd-boot.enable = true;
@@ -31,7 +31,7 @@
 
   imports =
     [ ./hardware-configuration.nix  
-      ../../../modules/desktop/options.nix 
+      "${self}/modules/desktop/options.nix" 
     ];
 
    system.stateVersion = "23.11"; # Update this to the latest supported version.

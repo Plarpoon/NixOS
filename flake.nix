@@ -40,7 +40,7 @@
       plarpoon = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/default.nix
+          (import ./hosts/default.nix { inherit self; })
           home-manager.nixosModules.home-manager
           {
             home-manager.users.plarpoon = import ./hosts/configuration.nix;
@@ -51,13 +51,13 @@
       bjorn = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/bjorn/default.nix
+          (import ./hosts/bjorn/default.nix { inherit self; })
         ];
       };
       daisy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/daisy/default.nix
+          (import ./hosts/daisy/default.nix { inherit self; })
         ];
       };
     };
