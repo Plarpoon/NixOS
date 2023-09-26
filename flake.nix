@@ -36,29 +36,29 @@
   };
 
   outputs = { self, nixpkgs, home-manager, nur, nixgl, plasma-manager }: {
-    nixosConfigurations = {
-      plarpoon = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/default.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.users.plarpoon = import ./hosts/configuration.nix;
-            system.stateVersion = "23.11";  # Update this to the latest supported version
-          }
-        ];
-      };
-      bjorn = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/bjorn/default.nix
-        ];
-      };
-      daisy = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/daisy/default.nix
-        ];
+    let
+      username = "plarpoon";
+      version = "23.11";
+    in
+    {
+      nixosConfigurations = {
+        bjorn = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/bjorn/default.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.users.${username} = import ./hosts/configuration.nix;
+              system.stateVersion = version
+            }
+          ];
+        };
+        daisy = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/daisy/default.nix
+          ];
+        };
       };
     };
   };
