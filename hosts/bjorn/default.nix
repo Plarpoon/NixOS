@@ -15,17 +15,17 @@
     libvdpau-va-gl
   ];
 
-  networking.hostName = "bjorn";
-  networking.networkmanager.enable = true;
+  networking.hostName = "bjorn";  # Set the hostname to "bjorn"
+  networking.networkmanager.enable = true;  # Enable NetworkManager
 
-  services.kresd.settings = {
+  services.kresd.config = ''
     policy.add(policy.all(policy.TLS_FORWARD({
       {'45.90.28.0', hostname='bjorn-e38da2.dns.nextdns.io'},
       {'2a07:a8c0::', hostname='bjorn-e38da2.dns.nextdns.io'},
       {'45.90.30.0', hostname='bjorn-e38da2.dns.nextdns.io'},
       {'2a07:a8c1::', hostname='bjorn-e38da2.dns.nextdns.io'}
-    })));
-  };
+    })))
+  '';
 
   desktop.kde.enable = true;
 
@@ -34,5 +34,5 @@
       ../modules/options.nix 
     ];
 
-   system.stateVersion = "23.11";
+   system.stateVersion = "23.11"; # Update this to the latest supported version.
 }

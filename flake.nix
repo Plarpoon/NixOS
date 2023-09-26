@@ -30,7 +30,7 @@
     nur.url = "github:nix-community/NUR";
     nixgl.url = "github:guibou/nixGL";
     plasma-manager = {
-      url = "github:ttuegel/plasma-manager";
+      url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
