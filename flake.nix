@@ -14,8 +14,8 @@
     ├── desktop
     │   ├── kde.nix
     │   ├── gnome.nix
-    │   └── hyprland.nix
-    └── options.nix
+    │   ├── hyprland.nix
+    │   └── default.nix
  */
 
 {

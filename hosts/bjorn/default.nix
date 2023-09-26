@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./hardware-configuration.nix  
+  ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -29,10 +32,5 @@
 
   desktop.kde.enable = true;
 
-  imports =
-    [ ./hardware-configuration.nix  
-      ../../../modules/desktop/options.nix 
-    ];
-
-   system.stateVersion = "23.11"; # Update this to the latest supported version.
+  system.stateVersion = "23.11"; # Update this to the latest supported version.
 }
