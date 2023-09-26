@@ -30,7 +30,7 @@
   desktop.kde.enable = true;
 
   imports =
-    [ ./hardware-configuration.nix 
+    [ ./hardware-configuration.nix
       ../modules/options.nix 
     ];
 
