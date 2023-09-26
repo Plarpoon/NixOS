@@ -30,8 +30,8 @@
   desktop.kde.enable = true;
 
   imports =
-    [ ./hardware-configuration.nix
-      ../modules/options.nix 
+    [ ./hardware-configuration.nix  
+      ../../../modules/desktop/options.nix 
     ];
 
    system.stateVersion = "23.11"; # Update this to the latest supported version.
