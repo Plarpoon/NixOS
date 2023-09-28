@@ -10,8 +10,8 @@
 #           └─ ...
 #
 
-[
-  ./gnome.nix
-  ./hyprland.nix
-  ./kde.nix
-]
+{
+  gnome = import ./gnome.nix;
+  hyprland = import ./hyprland.nix;
+  kde = import ./kde.nix;
+}

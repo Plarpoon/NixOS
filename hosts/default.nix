@@ -12,17 +12,17 @@
 { lib, inputs, nixpkgs, home-manager, nur, plasma-manager, vars, ... }:
 
 let
-  system = "x86_64-linux";                                  # System Architecture
+  system = "x86_64-linux";
 
   pkgs = import nixpkgs {
     inherit system;
-    config.allowUnfree = true;                              # Allow Proprietary Software
+    config.allowUnfree = true;
   };
 
   lib = nixpkgs.lib;
 in
 {
-  bjorn = lib.nixosSystem {                                # Laptop Profile
+  bjorn = lib.nixosSystem {
     inherit system;
     specialArgs = {
       inherit inputs pkgs vars;
@@ -30,6 +30,7 @@ in
     modules = [
       ./bjorn
       ./configuration.nix
+      inputs.modules.desktop
 
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
