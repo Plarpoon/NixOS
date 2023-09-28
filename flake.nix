@@ -45,6 +45,7 @@
         modules = [
           ./hosts/bjorn/default.nix
           home-manager.nixosModules.home-manager
+          self.modules.desktop.default
           {
             home-manager.users.${username} = import ./hosts/configuration.nix;
             system.stateVersion = "23.11";  # Update this to the latest supported version
