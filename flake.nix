@@ -37,8 +37,11 @@
 
   outputs = { self, nixpkgs, home-manager, nur, nixgl, plasma-manager }: let
     username = "plarpoon";
-  in
-  {
+{
+  modules = {
+    desktop = ./modules/desktop/default.nix;
+  };
+
     nixosConfigurations = {
       bjorn = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
