@@ -1,12 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix  
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
 
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [
     vaapiIntel
@@ -18,9 +19,6 @@
     libvdpau-va-gl
   ];
 
-  networking.hostName = "bjorn";  # Set the hostname to "bjorn"
-  networking.networkmanager.enable = true;  # Enable NetworkManager
-
   services.kresd.config = ''
     policy.add(policy.all(policy.TLS_FORWARD({
       {'45.90.28.0', hostname='bjorn-e38da2.dns.nextdns.io'},
@@ -30,7 +28,7 @@
     })))
   '';
 
-  desktop.kde.enable = true;
+  networking.networkmanager.enable = true;  # Enable NetworkManager
 
-  system.stateVersion = "23.11"; # Update this to the latest supported version.
+  desktop.kde.enable = true;
 }
