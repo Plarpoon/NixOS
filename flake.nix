@@ -37,6 +37,7 @@
 
   outputs = { self, nixpkgs, home-manager, nur, nixgl, plasma-manager }: let
     username = "plarpoon";
+in
 {
   modules = {
     desktop = ./modules/desktop/default.nix;
@@ -48,7 +49,7 @@
         modules = [
           ./hosts/bjorn/default.nix
           home-manager.nixosModules.home-manager
-          self.modules.desktop.default
+          self.modules.desktop
           {
             home-manager.users.${username} = import ./hosts/configuration.nix;
             system.stateVersion = "23.11";  # Update this to the latest supported version
