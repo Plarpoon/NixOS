@@ -9,7 +9,7 @@
 #           └─ default.nix 
 #
 
-{ lib, inputs, nixpkgs, nixpkgs-unstable, home-manager, nur, doom-emacs, hyprland, plasma-manager, vars, ... }:
+{ lib, inputs, nixpkgs, home-manager, nur, plasma-manager, vars, ... }:
 
 let
   system = "x86_64-linux";                                  # System Architecture
