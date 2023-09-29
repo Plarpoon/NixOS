@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../modules/desktop/default.nix
+    vars.modules.desktop.default.nix
     ];
 
   boot = {
