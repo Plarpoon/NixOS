@@ -30,7 +30,6 @@ in
     modules = [
       ./bjorn
       ./configuration.nix
-      inputs.modules.desktop
 
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
