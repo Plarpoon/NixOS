@@ -33,20 +33,19 @@
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    modules.url = "path:./modules";
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, nur, nixgl, plasma-manager, modules, ... }: 
+  outputs = inputs @ { self, nixpkgs, home-manager, nur, nixgl, plasma-manager, ... }: 
   let
     vars = {
       user = "plarpoon";
-      modules = modules;
     };
+    modules = import ./modules;
   in
   {
     nixosConfigurations = import ./hosts {
       inherit (nixpkgs) lib;
-      inherit inputs nixpkgs home-manager nur plasma-manager vars;
+      inherit inputs nixpkgs home-manager nur plasma-manager vars modules;
     };
   };
 }
