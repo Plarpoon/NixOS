@@ -22,7 +22,6 @@
   description = "A flake for my system configurations";
 
   inputs = {
-    modules.url = "path:./modules";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -34,11 +33,15 @@
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    modules.url = "path:./modules";
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, nur, nixgl, plasma-manager, modules, ... }: 
   let
-    vars = { user = "plarpoon"; modules = modules; };
+    vars = {
+      user = "plarpoon";
+      modules = modules;
+    };
   in
   {
     nixosConfigurations = import ./hosts {
