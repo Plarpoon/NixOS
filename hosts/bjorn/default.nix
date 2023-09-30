@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    self.modules.default
+    inputs.self.nixosModules.default
   ];
 
   boot = {

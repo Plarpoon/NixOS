@@ -25,7 +25,7 @@ in
   bjorn = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs pkgs vars;
+      inherit inputs vars;
     };
     modules = [
       ./bjorn
