@@ -22,21 +22,22 @@ let
   lib = nixpkgs.lib;
 in
 {
+  {
   bjorn = lib.nixosSystem {
     inherit system;
     specialArgs = {
       inherit inputs pkgs vars;
     };
     modules = [
-      ./bjorn
+      { config, ... }: { imports = [ ./bjorn ]; }
       ./configuration.nix
-
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
       }
     ];
   };
+}
 
   daisy = lib.nixosSystem {
     inherit system;

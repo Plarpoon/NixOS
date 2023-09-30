@@ -1,10 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
-    vars.modules.desktop.default.nix
-    ];
+    inputs.self.modules.desktop.default
+  ];
+
 
   boot = {
     loader.systemd-boot.enable = true;
