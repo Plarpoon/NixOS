@@ -9,21 +9,13 @@
 #           └─ default.nix 
 #
 
-{ lib, inputs, nixpkgs, home-manager, nur, plasma-manager, vars, modules, ... }:
+{ inputs, nixpkgs, home-manager, nur, plasma-manager, vars, modules, ... }:
 
 let
-  system = "x86_64-linux";
-
-  pkgs = import nixpkgs {
-    inherit system;
-    config.allowUnfree = true;
-  };
-
   lib = nixpkgs.lib;
 in
 {
   bjorn = lib.nixosSystem {
-    inherit system;
     specialArgs = {
       inherit inputs vars;
     };
@@ -38,9 +30,8 @@ in
   };
 
   daisy = lib.nixosSystem {
-    inherit system;
     specialArgs = {
-      inherit inputs pkgs vars;
+      inherit inputs vars;
       host = {
         hostName = "daisy";
       };
