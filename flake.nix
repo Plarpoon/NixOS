@@ -1,52 +1,19 @@
-/* 
-.
-├── flake.nix
-├── hosts
-│   ├── bjorn
-│   │   ├── default.nix
-│   │   └── hardware-configuration.nix
-│   ├── daisy
-│   │   ├── default.nix
-│   │   └── hardware-configuration.nix
-│   ├── default.nix
-│   └── configuration.nix
-└── modules
-    ├── desktop
-    │   ├── kde.nix
-    │   ├── gnome.nix
-    │   ├── hyprland.nix
-    │   └── default.nix
- */
-
 {
-  description = "A flake for my system configurations";
-
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+  outputs = _: {
+    nixosConfig = {
+      path = ./nixosConfig;
+      description = "A decent nixos starter config";
+      welcomeText = ''
+        Welcome to NixOS...
+        We swear it isn't a cult!
+      '';
     };
-    nur.url = "github:nix-community/NUR";
-    nixgl.url = "github:guibou/nixGL";
-    plasma-manager = {
-      url = "github:pjones/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-  outputs = inputs @ { self, nixpkgs, home-manager, nur, nixgl, plasma-manager, ... }: 
-  let
-    vars = {
-      user = "plarpoon";
-    };
-    modules = import ./modules;
-  in
-  {
-    nixosConfigurations = import ./hosts {
-      inherit (nixpkgs) lib;
-      inherit inputs nixpkgs home-manager nur plasma-manager vars;
-      modules = self.modules;
+    homeManager = {
+      path = ./homeManager;
+      description = "meh";
+      welcomeText = ''
+        homeManager bad, or maybe I'm just salty
+      '';
     };
   };
 }
