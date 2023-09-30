@@ -6,7 +6,6 @@
     inputs.self.modules.desktop.default
   ];
 
-
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;

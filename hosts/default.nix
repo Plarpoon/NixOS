@@ -28,7 +28,7 @@ in
       inherit inputs pkgs vars;
     };
     modules = [
-      { config, ... }: { imports = [ ./bjorn/default.nix ]; }
+      { config, ... }: { imports = [ ./bjorn ]; }
       ./configuration.nix
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
@@ -47,7 +47,7 @@ in
     };
     modules = [
       nur.nixosModules.nur
-      ./daisy/default.nix
+      ./daisy
       ./configuration.nix
 
       home-manager.nixosModules.home-manager {
