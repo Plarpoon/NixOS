@@ -22,7 +22,6 @@ let
   lib = nixpkgs.lib;
 in
 {
-  {
   bjorn = lib.nixosSystem {
     inherit system;
     specialArgs = {
@@ -37,7 +36,6 @@ in
       }
     ];
   };
-}
 
   daisy = lib.nixosSystem {
     inherit system;
