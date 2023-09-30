@@ -9,7 +9,7 @@
 #           └─ default.nix 
 #
 
-{ lib, inputs, nixpkgs, home-manager, nur, plasma-manager, vars, ... }:
+{ lib, inputs, nixpkgs, home-manager, nur, plasma-manager, vars, modules, ... }:
 
 let
   system = "x86_64-linux";

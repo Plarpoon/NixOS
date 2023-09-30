@@ -45,7 +45,8 @@
   {
     nixosConfigurations = import ./hosts {
       inherit (nixpkgs) lib;
-      inherit inputs nixpkgs home-manager nur plasma-manager vars modules;
+      inherit inputs nixpkgs home-manager nur plasma-manager vars;
+      modules = self.modules;
     };
   };
 }
