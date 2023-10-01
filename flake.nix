@@ -10,10 +10,10 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: let  # Add this line
-    username = self.username;  # Add this line
-    stateVersion = self.stateVersion;  # Add this line
-  in {  # Add this line
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+    username = self.username;
+    stateVersion = self.stateVersion;
+  in {
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       modules = [
