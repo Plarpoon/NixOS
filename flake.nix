@@ -20,7 +20,7 @@
           ({ config, pkgs, ... }: {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./hosts/bjorn/home.nix;
+            home-manager.users.${username} = import ./hosts/bjorn/home.nix { inherit inputs username stateVersion; };
             system.stateVersion = stateVersion;
           })
         ];
@@ -35,7 +35,7 @@
           ({ config, pkgs, ... }: {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./hosts/daisy/home.nix;
+            home-manager.users.${username} = import ./hosts/daisy/home.nix { inherit inputs username stateVersion; };
             system.stateVersion = stateVersion;
           })
         ];
