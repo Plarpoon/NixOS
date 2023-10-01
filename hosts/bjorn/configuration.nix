@@ -20,12 +20,12 @@
   i18n = {
     defaultLocale = "en_US.UTF-8";
     # Set the keyboard layout to Italian
-    consoleKeyMap = "it";
+    console.keyMap = "it";
   };
 
   # Set the date, time and number formats to Italian
   services.xserver.layout = "it";
-
+  
   ## Users
   users.users = {
     "${username}" = {
@@ -62,7 +62,7 @@
         # Add unfree packages you would like to allow here.
         # for example:
         "vscode"
-        "microsoft-edge"
+        "microsoft-edge-stable"
       ];
   };
 
