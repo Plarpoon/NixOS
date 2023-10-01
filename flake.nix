@@ -11,22 +11,16 @@
     username = "plarpoon";
     stateVersion = "23.11";
   in {
-    homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      modules = [
-        ./home.nix
-      ];
-      extraSpecialArgs = { inherit inputs username stateVersion; };
-    };
-
     nixosConfigurations = {
       bjorn = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./hosts/bjorn/configuration.nix
-          self.inputs.home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
           ({ config, pkgs, ... }: {
-            home-manager.users.${username} = self.homeConfigurations.${username};
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./hosts/bjorn/home.nix;
             system.stateVersion = stateVersion;
           })
         ];
@@ -37,9 +31,11 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/daisy/configuration.nix
-          self.inputs.home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
           ({ config, pkgs, ... }: {
-            home-manager.users.${username} = self.homeConfigurations.${username};
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./hosts/daisy/home.nix;
             system.stateVersion = stateVersion;
           })
         ];
