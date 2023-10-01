@@ -21,7 +21,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./hosts/bjorn/home.nix { 
-              inherit inputs username stateVersion; 
+              inherit inputs username stateVersion pkgs; 
               config = config.home-manager.users.${username}; 
             };
             system.stateVersion = stateVersion;
@@ -39,7 +39,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./hosts/daisy/home.nix { 
-              inherit inputs username stateVersion; 
+              inherit inputs username stateVersion pkgs; 
               config = config.home-manager.users.${username}; 
             };
             system.stateVersion = stateVersion;
