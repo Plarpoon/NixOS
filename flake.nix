@@ -23,25 +23,27 @@
       bjorn = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/bjorn/configuration.nix
+          { pkgs, ... }: { imports = [ ./hosts/bjorn/configuration.nix ]; }
           self.inputs.home-manager.nixosModules.home-manager
           { 
             home-manager.users.${self.username} = self.homeConfigurations.${self.username}; 
             system.stateVersion = self.stateVersion;
           }
         ];
+        specialArgs = { inherit inputs username stateVersion; };  # Add this line
       };
 
       daisy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/daisy/configuration.nix
+          { pkgs, ... }: { imports = [ ./hosts/daisy/configuration.nix ]; }
           self.inputs.home-manager.nixosModules.home-manager
           { 
             home-manager.users.${self.username} = self.homeConfigurations.${self.username}; 
             system.stateVersion = self.stateVersion;
           }
         ];
+        specialArgs = { inherit inputs username stateVersion; };  # Add this line
       };
     };
   };
