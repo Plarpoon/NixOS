@@ -1,19 +1,22 @@
 {
-  outputs = _: {
-    nixosConfig = {
-      path = ./nixosConfig;
-      description = "A decent nixos starter config";
-      welcomeText = ''
-        Welcome to NixOS...
-        We swear it isn't a cult!
-      '';
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    homeManager = {
-      path = ./homeManager;
-      description = "meh";
-      welcomeText = ''
-        homeManager bad, or maybe I'm just salty
-      '';
+  };
+  outputs = inputs @ {
+    home-manager,
+    nixpkgs,
+    ...
+  }: {
+    homeConfigurations."plarpoon" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      modules = [
+        ./home.nix
+      ];
+      extraSpecialArgs = {inherit inputs;};
     };
   };
 }
