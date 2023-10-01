@@ -16,6 +16,16 @@
   ## Misc
   time.timeZone = "Europe/Rome";
 
+  # Set the system locale
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    # Set the keyboard layout to Italian
+    consoleKeyMap = "it";
+  };
+
+  # Set the date, time and number formats to Italian
+  services.xserver.layout = "it";
+
   ## Users
   users.users = {
     "${username}" = {
@@ -52,6 +62,7 @@
         # Add unfree packages you would like to allow here.
         # for example:
         "vscode"
+        "microsoft-edge"
       ];
   };
 
@@ -135,6 +146,7 @@
       pkgs.zsh
       pkgs.vscode
       pkgs.partition-manager
+      pkgs.microsoft-edge
     ];
     variables = {
       EDITOR = "neovim";
