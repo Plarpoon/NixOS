@@ -49,7 +49,7 @@
       builtins.elem (lib.getName pkg) [
         # Add unfree packages you would like to allow here.
         # for example:
-        #"hello-unfree"
+        "vscode"
       ];
   };
 
@@ -129,12 +129,20 @@
     # Add packages system-wide
     systemPackages = [
       pkgs.neovim
+      pkgs.git
+      pkgs.zsh
+      pkgs.vscode
     ];
     variables = {
       EDITOR = "neovim";
       VISUAL = "neovim";
     };
   };
+
+  # KDE
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   system.stateVersion = stateVersion;
 }

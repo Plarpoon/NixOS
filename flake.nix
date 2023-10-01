@@ -1,6 +1,4 @@
 {
-  description = "A very basic flake";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
@@ -9,26 +7,26 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: let
-    username = "plarpoon";  # Define username here
-    stateVersion = "23.11";  # Define stateVersion here
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+    username = "plarpoon";
+    stateVersion = "23.11";
   in {
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       modules = [
         ./home.nix
       ];
-      extraSpecialArgs = { inherit inputs username stateVersion; }; 
+      extraSpecialArgs = { inherit inputs username stateVersion; };
     };
 
     nixosConfigurations = {
       bjorn = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/bjorn/configuration.nix  
+          ./hosts/bjorn/configuration.nix
           self.inputs.home-manager.nixosModules.home-manager
           ({ config, pkgs, ... }: {
-            home-manager.users.${username} = self.homeConfigurations.${username}; 
+            home-manager.users.${username} = self.homeConfigurations.${username};
             system.stateVersion = stateVersion;
           })
         ];
@@ -38,10 +36,10 @@
       daisy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/daisy/configuration.nix  
+          ./hosts/daisy/configuration.nix
           self.inputs.home-manager.nixosModules.home-manager
           ({ config, pkgs, ... }: {
-            home-manager.users.${username} = self.homeConfigurations.${username}; 
+            home-manager.users.${username} = self.homeConfigurations.${username};
             system.stateVersion = stateVersion;
           })
         ];
