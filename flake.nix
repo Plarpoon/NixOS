@@ -25,12 +25,12 @@
         modules = [
           { pkgs, ... }: { imports = [ ./hosts/bjorn/configuration.nix ]; }
           self.inputs.home-manager.nixosModules.home-manager
-          { 
+          ({ config, pkgs, ... }: {
             home-manager.users.${self.username} = self.homeConfigurations.${self.username}; 
             system.stateVersion = self.stateVersion;
-          }
+          })
         ];
-        specialArgs = { inherit inputs username stateVersion; };  # Add this line
+        specialArgs = { inherit inputs username stateVersion; };
       };
 
       daisy = nixpkgs.lib.nixosSystem {
@@ -38,12 +38,12 @@
         modules = [
           { pkgs, ... }: { imports = [ ./hosts/daisy/configuration.nix ]; }
           self.inputs.home-manager.nixosModules.home-manager
-          { 
+          ({ config, pkgs, ... }: {
             home-manager.users.${self.username} = self.homeConfigurations.${self.username}; 
             system.stateVersion = self.stateVersion;
-          }
+          })
         ];
-        specialArgs = { inherit inputs username stateVersion; };  # Add this line
+        specialArgs = { inherit inputs username stateVersion; };
       };
     };
   };
