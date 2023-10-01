@@ -11,6 +11,8 @@
     ./hardware-configuration.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   ## Misc
   time.timeZone = "Europe/Rome";
 
@@ -132,6 +134,7 @@
       pkgs.git
       pkgs.zsh
       pkgs.vscode
+      pkgs.partition-manager
     ];
     variables = {
       EDITOR = "neovim";
