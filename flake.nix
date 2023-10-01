@@ -1,6 +1,5 @@
 {
-  username = "plarpoon";
-  stateVersion = "23.11";
+  description = "A very basic flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -10,9 +9,9 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
-    username = self.username;
-    stateVersion = self.stateVersion;
+  outputs = { self, nixpkgs, home-manager, ... }: let
+    username = "plarpoon";  # Define username here
+    stateVersion = "23.11";  # Define stateVersion here
   in {
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
