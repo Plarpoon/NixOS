@@ -19,12 +19,15 @@
   # Set the system locale
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    # Set the keyboard layout to Italian
-    console.keyMap = "it";
   };
 
-  # Set the date, time and number formats to Italian
-  services.xserver.layout = "it";
+  # Set the X11 keymap
+  services.xserver = {
+    layout = "it";
+  };
+
+  # Set the console keymap
+  console.keyMap = "it";
   
   ## Users
   users.users = {
@@ -147,6 +150,7 @@
       pkgs.vscode
       pkgs.partition-manager
       pkgs.microsoft-edge
+      pkgs.direnv
     ];
     variables = {
       EDITOR = "neovim";
