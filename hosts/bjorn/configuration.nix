@@ -45,17 +45,25 @@
     };
   };
 
-  # Knot resolver
-  services.knot-resolver = {
-    enable = true;
-    extraConfig = ''
-      policy.add(policy.all(policy.TLS_FORWARD({
-        {'45.90.28.0', hostname='bjorn-e38da2.dns.nextdns.io'},
-        {'2a07:a8c0::', hostname='bjorn-e38da2.dns.nextdns.io'},
-        {'45.90.30.0', hostname='bjorn-e38da2.dns.nextdns.io'},
-        {'2a07:a8c1::', hostname='bjorn-e38da2.dns.nextdns.io'}
-      })))
-    '';
+  # Systemd services
+  systemd = {
+    packages = [ pkgs.systemd ];
+
+    # Systemd-resolved configuration
+    resolved = {
+      enable = true;
+      settings = {
+        Resolve = {
+          DNS = [
+            "45.90.28.0#bjorn-e38da2.dns.nextdns.io"
+            "2a07:a8c0::#bjorn-e38da2.dns.nextdns.io"
+            "45.90.30.0#bjorn-e38da2.dns.nextdns.io"
+            "2a07:a8c1::#bjorn-e38da2.dns.nextdns.io"
+          ];
+          DNSOverTLS = "yes";
+        };
+      };
+    };
   };
 
   ## SSH
