@@ -144,6 +144,7 @@
     defaultPackages = lib.mkForce [];
     # Add packages system-wide
     systemPackages = [
+      pkgs.firefox
       pkgs.neovim
       pkgs.git
       pkgs.zsh
