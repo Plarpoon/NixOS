@@ -1,13 +1,14 @@
 {
-  inputs,
-  lib,
-  pkgs,
-  username,
-  stateVersion,
+  inputs,  # Inputs from the flake
+  lib,     # Nixpkgs library functions
+  pkgs,    # Nix packages
+  username,  # Username for the system
+  stateVersion,  # NixOS state version
   ...
 }:
 
 let
+  # Import the shared configuration from default.nix
   sharedConfig = import ../default.nix { inherit inputs lib pkgs username stateVersion; };
 in
 {
@@ -19,10 +20,10 @@ in
     sharedConfig
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;  # Use the latest Linux kernel packages
 
   ## Misc
-  time.timeZone = "Europe/Rome";
+  time.timeZone = "Europe/Rome";  # Set the system time zone
 
   # Set the system locale
   i18n = {
@@ -40,125 +41,44 @@ in
   ## Users
   users.users = {
     "${username}" = {
-      # You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      #initialPassword = "nixos";
-      isNormalUser = true;
+      isNormalUser = true;   # The user is a normal user (not a system user)
       openssh.authorizedKeys.keys = [
         # Add your SSH public key(s) here, if you plan on using SSH to connect to this user
       ];
-      # Be sure to add any other groups you need (such as audio, docker, etc)
-      extraGroups = ["wheel" "networkmanager"];
+      extraGroups = ["wheel" "networkmanager"];   # The user is part of the 'wheel' and 'networkmanager' groups
     };
   };
 
   networking.nameservers = [ 
     "45.90.28.0#bjorn-e38da2.dns.nextdns.io" 
     "2a07:a8c0::#bjorn-e38da2.dns.nextdns.io" 
-    "45.90.30.0#bjorn-e38da2.dns.nextdns.io" 
-    "2a07:a8c1::#bjorn-e38da2.dns.nextdns.io" 
   ];
 
   services.resolved = {
-    enable = true;
-    dnssec = "true";
-    domains = [ "~." ];
+    enable = true;   # Enable systemd-resolved for DNS resolution
+    dnssec = "true";   # Enable DNSSEC for DNS resolution
+    domains = [ "~." ];   # Use these DNS servers for all domains
     fallbackDns = [ 
-      "45.90.28.0#bjorn-e38da2.dns.nextdns.io" 
-      "2a07:a8c0::#bjorn-e38da2.dns.nextdns.io" 
       "45.90.30.0#bjorn-e38da2.dns.nextdns.io" 
       "2a07:a8c1::#bjorn-e38da2.dns.nextdns.io" 
     ];
     extraConfig = ''
-      DNSOverTLS=yes
+      DNSOverTLS=yes   # Use DNS over TLS for DNS resolution
     '';
-  };
-
-  ## SSH
-  services.openssh = {
-    enable = true;
-    settings = {
-      # Allow only key based ssh access
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-    };
-  };
-
-  ## nixpkgs
-  nixpkgs = {
-    #The system to build this configuration for
-    hostPlatform = "x86_64-linux";
-    config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
-        # Add unfree packages you would like to allow here.
-        # for example:
-        "vscode"
-        "microsoft-edge-stable"
-      ];
   };
 
   ## Networking
   networking = {
-    # Set this systems hostname
-    hostName = "bjorn";
-    # NetworkManager is the easiest there is multiple other options
-    networkmanager.enable = true;
-    useDHCP = false;
+    hostName = "bjorn";   # Set this system's hostname
+
+    networkmanager.enable = true;   # Enable NetworkManager for network configuration
+
+    useDHCP = false;   # Do not use DHCP for network configuration (use static IP addresses)
   };
 
-  ## Sound
-  # This is badly named and is only for ALSA
-  sound.enable = lib.mkForce false;
-  # We don't need pulseaudio because pipewire has a emulated version
-  hardware.pulseaudio.enable = lib.mkForce false;
-  security.rtkit.enable = true;
-  # Enable and configure pipewire
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse.enable = true;
-    # Optional jack support
-    #jack.enable = true;
-  };
+hardware.enableRedistributableFirmware = true;   # Enable redistributable firmware (may be required for some hardware)
 
-  hardware = {
-    # Your system will likely be un-bootable without this
-    enableRedistributableFirmware = true;
-    # Uncomment one of these depending on your CPU
-    cpu.intel.updateMicrocode = true;
-    #cpu.amd.updateMicrocode = true;
-  };
+hardware.cpu.intel.updateMicrocode = true;   # Update CPU microcode (for Intel CPUs)
 
-  ## Nix settings
-  nix = {
-    # Pin nixpkgs in the flake registry and $NIX_PATH to your system flakes nixpkgs
-    nixPath = ["nixpkgs=flake:nixpkgs"];
-    registry.nixpkgs.flake = inputs.nixpkgs;
-
-    settings = {
-      # Ignore global registry
-      flake-registry = "";
-
-      # Enable flakes and the "nix" command
-      experimental-features = [
-        "flakes"
-        "nix-command"
-      ];
-
-      # Reduce disk usage
-      auto-optimise-store = true;
-    };
-  };
-
-  # KDE
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  system.stateVersion = stateVersion;
+system.stateVersion = stateVersion;   # Set the system state version
 }
