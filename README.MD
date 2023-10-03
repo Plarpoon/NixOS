@@ -3,7 +3,8 @@
 My personal repository for NixOS and home-manager configuration
 
 ## **Prerequisites**
-- This configuration always assumes that your hosts directories contax a configuration.nix file and a home.nix file
+
+- This configuration always assumes that your hosts directories contains a configuration.nix file and a home.nix file
 
 **Author:** Alessandro Suha
 

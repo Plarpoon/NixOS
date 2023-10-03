@@ -52,6 +52,7 @@
       # Editors
       neovim # Vim-based editor
       vscode # Microsoft's editor
+      kate # KDE's editor
 
       # Version Control
       git # Distributed VCS
@@ -73,6 +74,10 @@
 
       # Encryption
       gnupg # OpenPGP implementation 
+
+      # Image Editing
+      gimp-with-plugins # GNU Image Manipulation Program
+      krita # Digital painting program
     ];
     variables = {
       EDITOR = "neovim";
@@ -105,7 +110,6 @@
       enable = true; # Enable PulseAudio support in PipeWire
     };
   };
-
 
   ## Desktop
   services = {
