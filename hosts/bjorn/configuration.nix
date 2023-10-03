@@ -5,10 +5,18 @@
   username,
   stateVersion,
   ...
-}: {
+}:
+
+let
+  sharedConfig = import ../default.nix { inherit inputs lib pkgs username stateVersion; };
+in
+{
   imports = [
     # Import your hardware configuration
     ./hardware-configuration.nix
+
+    # Import the shared configuration
+    sharedConfig
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -126,17 +134,6 @@
     #cpu.amd.updateMicrocode = true;
   };
 
-  ## Boot
-  boot = {
-    loader = {
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 10;
-      };
-      efi.canTouchEfiVariables = true;
-    };
-  };
-
   ## Nix settings
   nix = {
     # Pin nixpkgs in the flake registry and $NIX_PATH to your system flakes nixpkgs
@@ -155,29 +152,6 @@
 
       # Reduce disk usage
       auto-optimise-store = true;
-    };
-  };
-
-  ## Environment
-  environment = {
-    # Backup the currently active configuration in /etc/current-config
-    etc."current-config".source = inputs.self.outPath;
-    # Remove all default packges
-    defaultPackages = lib.mkForce [];
-    # Add packages system-wide
-    systemPackages = [
-      pkgs.firefox
-      pkgs.neovim
-      pkgs.git
-      pkgs.zsh
-      pkgs.vscode
-      pkgs.partition-manager
-      pkgs.microsoft-edge
-      pkgs.direnv
-    ];
-    variables = {
-      EDITOR = "neovim";
-      VISUAL = "neovim";
     };
   };
 
