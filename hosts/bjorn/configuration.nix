@@ -20,24 +20,6 @@ in
     sharedConfig
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;  # Use the latest Linux kernel packages
-
-  ## Misc
-  time.timeZone = "Europe/Rome";  # Set the system time zone
-
-  # Set the system locale
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-  };
-
-  # Set the X11 keymap
-  services.xserver = {
-    layout = "it";
-  };
-
-  # Set the console keymap
-  console.keyMap = "it";
-  
   ## Users
   users.users = {
     "${username}" = {

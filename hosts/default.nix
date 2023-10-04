@@ -38,6 +38,20 @@
     config.allowUnfree = true;
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest; # Use the latest Linux kernel packages
+
+  ## Misc
+  time.timeZone = "Europe/Rome"; # Set the system time zone
+
+  # Set the system locale
+  i18n = {
+    defaultLocale = "it_IT.UTF-8";
+    supportedLocales = [ "en_US.UTF-8/UTF-8" "it_IT.UTF-8/UTF-8" ];
+  };
+
+  # Set the console keymap
+  console.keyMap = "it";
+
   environment = {
     # Backup the currently active configuration in /etc/current-config
     etc."current-config".source = inputs.self.outPath;
@@ -70,7 +84,8 @@
       nixpkgs-fmt # Nix code formatter
 
       # Communication
-      discord # Communication platform
+      discord # Discord client
+      whatsapp-for-linux # WhatsApp client
 
       # Encryption
       gnupg # OpenPGP implementation 
@@ -123,6 +138,8 @@
       desktopManager.plasma5 = {
         enable = true; # Enable the Plasma 5 desktop environment
       };
+
+      layout = "it"; # Set the keyboard layout
     };
   };
 
