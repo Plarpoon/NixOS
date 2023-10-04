@@ -43,7 +43,7 @@
   ## Misc
   time.timeZone = "Europe/Rome"; # Set the system time zone
 
-  # Set the system locale
+  ## Set the system locale
   i18n = {
     defaultLocale = "it_IT.UTF-8";
     supportedLocales = [ "en_US.UTF-8/UTF-8" "it_IT.UTF-8/UTF-8" ];
@@ -51,6 +51,10 @@
 
   # Set the console keymap
   console.keyMap = "it";
+
+  ## Printer and Scanner
+  services.printing.enable = true; # Enable the CUPS printing system
+  hardware.sane.enable = true; # Enable the SANE scanner system
 
   environment = {
     # Backup the currently active configuration in /etc/current-config
