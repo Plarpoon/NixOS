@@ -93,6 +93,10 @@
       # Image Editing
       gimp-with-plugins # GNU Image Manipulation Program
       krita # Digital painting program
+
+      # Misc Programs
+      latte-dock # KDE's dock replacement
+      steam # Gaming platform
     ];
     variables = {
       EDITOR = "neovim";
