@@ -96,12 +96,18 @@
 
       # Misc Programs
       latte-dock # KDE's dock replacement
-      steam # Gaming platform
     ];
     variables = {
       EDITOR = "neovim";
       VISUAL = "neovim";
     };
+  };
+
+  ## Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
   ## Sound
