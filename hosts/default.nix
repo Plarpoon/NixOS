@@ -115,17 +115,11 @@
   };
 
   ## Sound
-  sound = {
-    enable = lib.mkForce false; # Disable sound (ALSA)
-  };
+  sound.enable = lib.mkForce false; # Disable sound (ALSA)
 
-  hardware.pulseaudio = {
-    enable = lib.mkForce false; # Disable PulseAudio (use PipeWire instead)
-  };
+  hardware.pulseaudio.enable = lib.mkForce false; # Disable PulseAudio (use PipeWire instead)
 
-  security.rtkit = {
-    enable = true; # Enable RealtimeKit for real-time scheduling in PulseAudio
-  };
+  security.rtkit.enable = true; # Enable RealtimeKit for real-time scheduling in PulseAudio
 
   services.pipewire = {
     enable = true; # Enable PipeWire for audio and video handling
