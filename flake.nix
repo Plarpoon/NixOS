@@ -42,12 +42,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
-              # Import the 'bjorn' host's home.nix file into Home Manager
-              home-manager.users.${username} = import ./hosts/bjorn/home.nix {
-                inherit inputs username stateVersion pkgs;
-                config = config.home-manager.users.${username};
-              };
-
               system.stateVersion = stateVersion;
             })
           ];
@@ -68,12 +62,6 @@
               # Configure Home Manager
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-
-              # Import the 'daisy' host's home.nix file into Home Manager
-              home-manager.users.${username} = import ./hosts/daisy/home.nix {
-                inherit inputs username stateVersion pkgs;
-                config = config.home-manager.users.${username};
-              };
 
               system.stateVersion = stateVersion;
             })
