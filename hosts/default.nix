@@ -1,5 +1,8 @@
 { inputs, lib, pkgs, username, stateVersion, ... }:
 
+let
+  modules = import ../modules/default.nix;
+in
 {
   ## Nix configuration
   nix = {
@@ -143,10 +146,6 @@
         enable = true; # Enable the SDDM display manager
       };
 
-      desktopManager.plasma5 = {
-        enable = true; # Enable the Plasma 5 desktop environment
-      };
-
       layout = "it"; # Set the keyboard layout
     };
   };
@@ -156,4 +155,10 @@
     enable = true;
     pinentryFlavor = "qt";
   };
+
+  # Import the modules
+  imports = [ modules ];
+
+  # Enable the Plasma module
+  programs.plasma.enable = true;
 }
