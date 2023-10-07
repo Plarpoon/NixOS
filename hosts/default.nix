@@ -1,8 +1,5 @@
 { inputs, lib, pkgs, username, stateVersion, ... }:
 
-let
-  modules = import ../modules/default.nix;
-in
 {
   ## Nix configuration
   nix = {
@@ -156,9 +153,5 @@ in
     pinentryFlavor = "qt";
   };
 
-  # Import the modules
-  imports = [ modules ];
-
-  # Enable the Plasma module
-  programs.plasma.enable = true;
+  plasmaEnable = true; # Enable KDE Plasma
 }

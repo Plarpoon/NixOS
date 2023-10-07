@@ -1,18 +1,9 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
-let
-  plasmaModule = import ./plasma.nix;
-in
 {
-  options = {
-    programs.plasma.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether to enable the Plasma module.";
-    };
-  };
-
-  config = lib.mkIf config.programs.plasma.enable {
-    programs.plasma = plasmaModule;
-  };
+  imports = 
+    let
+      plasmaModulePath = ./plasma.nix;
+    in
+      lib.optional config.plasmaEnable plasmaModulePath;
 }
