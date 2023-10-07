@@ -1,6 +1,11 @@
 { inputs, lib, pkgs, username, stateVersion, ... }:
 
 {
+  imports = [
+    # Import your default configuration
+    ../modules/default.nix
+  ];
+
   ## Nix configuration
   nix = {
     nixPath = [ "nixpkgs=flake:nixpkgs" ]; # Pin nixpkgs in the flake registry and $NIX_PATH to your system flakes nixpkgs
@@ -153,5 +158,5 @@
     pinentryFlavor = "qt";
   };
 
-  plasmaEnable = true; # Enable KDE Plasma
+  plasma.enable = true; # Enable KDE Plasmaf
 }

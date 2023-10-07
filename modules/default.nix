@@ -1,9 +1,16 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  imports = 
-    let
-      plasmaModulePath = ./plasma.nix;
-    in
-      lib.optional config.plasmaEnable plasmaModulePath;
+  options = {
+    kde.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable KDE Plasma";
+    };
+  };
+
+  imports = [
+    # Import your Plasma configuration
+    ./plasma.nix
+  ];
 }
