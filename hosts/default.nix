@@ -1,13 +1,33 @@
-{ config, inputs, lib, pkgs, username, stateVersion, vars, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  username,
+  stateVersion,
+  vars,
+  ...
+}:
 
 let
-  sharedConfig = import ../modules/default.nix { inherit config inputs lib pkgs username stateVersion vars; };
+  sharedConfig = import ../modules/default.nix {
+    inherit
+      config
+      inputs
+      lib
+      pkgs
+      username
+      stateVersion
+      vars
+    ;
+  };
 in
 {
-  imports = [
-    # Import the shared configuration
-    sharedConfig
-  ];
+  imports =
+    [
+      # Import the shared configuration
+      sharedConfig
+    ];
 
   ## Nix configuration
   nix = {
@@ -54,7 +74,10 @@ in
   ## Set the system locale
   i18n = {
     defaultLocale = "it_IT.UTF-8";
-    supportedLocales = [ "en_US.UTF-8/UTF-8" "it_IT.UTF-8/UTF-8" ];
+    supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+      "it_IT.UTF-8/UTF-8"
+    ];
   };
 
   # Set the console keymap
@@ -100,7 +123,7 @@ in
       whatsapp-for-linux # WhatsApp client
 
       # Encryption
-      gnupg # OpenPGP implementation 
+      gnupg # OpenPGP implementation
 
       # Image Editing
       gimp-with-plugins # GNU Image Manipulation Program
@@ -147,9 +170,9 @@ in
 
   displayManager.sddm.enable = true; # Enable the SDDM display manager
 
-  layout.xserver.layout= "it"; # Set the keyboard layout
+  layout.xserver.layout = "it"; # Set the keyboard layout
 
-   ## Pinentry
-   programs.gnupg.agent.enable= true;
-   programs.gnupg.agent.pinentryFlavor= "qt";
+  ## Pinentry
+  programs.gnupg.agent.enable = true;
+  programs.gnupg.agent.pinentryFlavor = "qt";
 }
