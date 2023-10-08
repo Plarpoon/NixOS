@@ -19,54 +19,60 @@
   };
 
   # Define the outputs for the flake
-  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }@inputs:
-    let
-      # Define some variables
-      username = "plarpoon";
-      stateVersion = "23.11";
-    in
+  outputs =
+    { nixpkgs, home-manager, ... }@inputs:
     {
       nixosConfigurations = {
         # Define a NixOS configuration for the 'bjorn' host
         bjorn = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           modules = [
             # Import the 'bjorn' host's configuration.nix file
             ./hosts/bjorn/configuration.nix
-
+            ./modules/nixos
             # Enable Home Manager
             home-manager.nixosModules.home-manager
-
-            ({ config, pkgs, ... }: {
+            {
               # Configure Home Manager
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              system.stateVersion = stateVersion;
-            })
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs;
+                };
+                users.plarpoon.imports = [
+                  ./modules/home-manager
+                  ./users/plarpoon
+                ];
+              };
+            }
           ];
-          specialArgs = { inherit inputs username stateVersion; };
+          specialArgs = {
+            inherit inputs;
+          };
         };
 
         # Define a NixOS configuration for the 'daisy' host
         daisy = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           modules = [
             # Import the 'daisy' host's configuration.nix file
             ./hosts/daisy/configuration.nix
 
             # Enable Home Manager
             home-manager.nixosModules.home-manager
-
-            ({ config, pkgs, ... }: {
+            {
               # Configure Home Manager
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              system.stateVersion = stateVersion;
-            })
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs;
+                };
+              };
+            }
           ];
-          specialArgs = { inherit inputs username stateVersion; };
+          specialArgs = {
+            inherit inputs;
+          };
         };
       };
     };
