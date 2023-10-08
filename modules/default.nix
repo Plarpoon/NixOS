@@ -1,16 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, username, stateVersion, vars, ... }:
 
+let
+  plasmaConfig = import ./plasma.nix { inherit config inputs lib pkgs username stateVersion vars; };
+in
 {
-  options = {
-    kde.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable KDE Plasma";
-    };
-  };
-
   imports = [
-    # Import your Plasma configuration
-    ./plasma.nix
+    # Import the plasma configuration if plasma is enabled
+    (lib.mkIf config.plasma.enable plasmaConfig)
   ];
 }

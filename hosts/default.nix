@@ -1,9 +1,12 @@
-{ inputs, lib, pkgs, username, stateVersion, ... }:
+{ config, inputs, lib, pkgs, username, stateVersion, vars, ... }:
 
+let
+  sharedConfig = import ../modules/default.nix { inherit config inputs lib pkgs username stateVersion vars; };
+in
 {
   imports = [
-    # Import your default configuration
-    ../modules/default.nix
+    # Import the shared configuration
+    sharedConfig
   ];
 
   ## Nix configuration
@@ -140,23 +143,13 @@
   };
 
   ## Desktop
-  services = {
-    xserver = {
-      enable = true; # Enable the X server
+  services.xserver.enable = true; # Enable the X server
 
-      displayManager.sddm = {
-        enable = true; # Enable the SDDM display manager
-      };
+  displayManager.sddm.enable = true; # Enable the SDDM display manager
 
-      layout = "it"; # Set the keyboard layout
-    };
-  };
+  layout.xserver.layout= "it"; # Set the keyboard layout
 
-  ## Pinentry
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryFlavor = "qt";
-  };
-
-  plasma.enable = true; # Enable KDE Plasmaf
+   ## Pinentry
+   programs.gnupg.agent.enable= true;
+   programs.gnupg.agent.pinentryFlavor= "qt";
 }
