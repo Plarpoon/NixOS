@@ -2,9 +2,11 @@
 
 Welcome to my personal repository for NixOS and home-manager configuration. I hope you find it useful and inspiring for your own setup.
 
-## **Prerequisites**
+## **Notes**
 
 - Before you dive into the code, please note that this configuration always assumes that your hosts directories contain a configuration.nix file and a hardware-configuration.nix file.
+
+- To run the build command in a more efficient and secure way, you can use the parameter “–use-remote-sudo”, as shown in this example: ***nix flake update && nixos-rebuild switch --use-remote-sudo --flake .#bjorn***. This way, you will only be asked to enter your sudo password when it is really necessary, and everything will go through the nix daemon.
 
 **Author:** Alessandro Suha
 

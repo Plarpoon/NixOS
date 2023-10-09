@@ -91,9 +91,9 @@
   ## Desktop
   services.xserver.enable = true; # Enable the X server
 
-  displayManager.sddm.enable = true; # Enable the SDDM display manager
+  services.xserver.displayManager.sddm.enable = true; # Enable the SDDM display manager
 
-  layout.xserver.layout = "it"; # Set the keyboard layout
+  services.xserver.layout = "it"; # Set the keyboard layout
 
   ## Pinentry
   programs.gnupg.agent.enable = true;
