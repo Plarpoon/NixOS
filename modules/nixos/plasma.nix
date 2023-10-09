@@ -15,6 +15,10 @@
   config = lib.mkIf config.kde.enable {
     programs = {
       zsh.enable = true;
+
+      ## Pinentry
+      gnupg.agent.enable = true;
+      gnupg.agent.pinentryFlavor = "qt";
     };
 
     services = {
@@ -32,6 +36,8 @@
         desktopManager.plasma5 = {
           enable = true; # Desktop Environment
         };
+
+        layout = "it"; # Set the keyboard layout
       };
     };
 

@@ -87,15 +87,4 @@
       enable = true; # Enable PulseAudio support in PipeWire
     };
   };
-
-  ## Desktop
-  services.xserver.enable = true; # Enable the X server
-
-  services.xserver.displayManager.sddm.enable = true; # Enable the SDDM display manager
-
-  services.xserver.layout = "it"; # Set the keyboard layout
-
-  ## Pinentry
-  programs.gnupg.agent.enable = true;
-  programs.gnupg.agent.pinentryFlavor = "qt";
 }
