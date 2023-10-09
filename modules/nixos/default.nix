@@ -1,5 +1,7 @@
-{ 
-  imports = [ ./plasma.nix ];
-  imports = [ ./sharedConfig.nix ];
-  imports = [ ./systemPackages.nix ];
+{
+  imports = [
+    ./plasma.nix
+    ./sharedConfig.nix
+    ./systemPackages.nix
+  ];
 }

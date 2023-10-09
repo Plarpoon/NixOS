@@ -1,4 +1,15 @@
 {
+  config,
+  inputs,
+  lib,
+  pkgs,
+  username,
+  stateVersion,
+  vars,
+  ...
+}:
+
+{
   ## Nix configuration
   nix = {
     nixPath = [ "nixpkgs=flake:nixpkgs" ]; # Pin nixpkgs in the flake registry and $NIX_PATH to your system flakes nixpkgs

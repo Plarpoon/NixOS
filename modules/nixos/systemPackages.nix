@@ -1,4 +1,15 @@
 {
+  config,
+  inputs,
+  lib,
+  pkgs,
+  username,
+  stateVersion,
+  vars,
+  ...
+}:
+
+{
   environment = {
     # Backup the currently active configuration in /etc/current-config
     etc."current-config".source = inputs.self.outPath;
