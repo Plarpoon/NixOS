@@ -54,6 +54,8 @@
 
       # Misc Programs
       latte-dock # KDE's dock replacement
+
+      # Windows translation layers
     ];
     variables = {
       EDITOR = "neovim";

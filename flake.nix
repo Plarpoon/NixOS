@@ -10,12 +10,6 @@
       # Make the home-manager flake follow the nixpkgs flake
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Add pjones's plasma-manager
-    plasma-manager = {
-      url = "github:pjones/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   # Define the outputs for the flake

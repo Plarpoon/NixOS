@@ -44,9 +44,13 @@
     environment = {
       systemPackages = with pkgs.libsForQt5; [
         # System-Wide Packages
-        bismuth # Dynamic Tiling
         packagekit-qt # Package Updater
       ];
+    };
+
+    ## Enable KDEConnect
+    programs.kdeconnect = {
+      enable = true;
     };
   };
 }
