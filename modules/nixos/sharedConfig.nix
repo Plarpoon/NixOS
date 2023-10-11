@@ -1,12 +1,11 @@
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  username,
-  stateVersion,
-  vars,
-  ...
+{ config
+, inputs
+, lib
+, pkgs
+, username
+, stateVersion
+, vars
+, ...
 }:
 
 {

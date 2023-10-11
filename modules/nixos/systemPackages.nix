@@ -1,12 +1,11 @@
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  username,
-  stateVersion,
-  vars,
-  ...
+{ config
+, inputs
+, lib
+, pkgs
+, username
+, stateVersion
+, vars
+, ...
 }:
 
 {
@@ -56,6 +55,8 @@
       latte-dock # KDE's dock replacement
 
       # Windows translation layers
+      wine-staging # Windows translation layer
+      bottles # WINE and other translation layer manager in a sandbox
     ];
     variables = {
       EDITOR = "neovim";
