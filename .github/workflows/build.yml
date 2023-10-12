@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: cachix/install-nix-action
+      - uses: cachix/install-nix-action@23
         with:
           # This installs both Nix and Cachix
           install_cachix: true
