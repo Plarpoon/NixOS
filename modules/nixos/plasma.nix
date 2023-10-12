@@ -41,10 +41,23 @@
     };
 
     environment = {
-      systemPackages = with pkgs.libsForQt5; [
+      systemPackages = with pkgs; [
         # System-Wide Packages
-        packagekit-qt # Package Updater
         latte-dock # KDE's dock replacement
+
+        # Icon themes
+        tela-icon-theme
+
+        # Theme
+        catppuccin-kde
+
+        # Cursor
+        catppuccin-cursors
+
+        # SDDM theme
+        catppuccin-sddm-corners
+
+        (pkgs.libsForQt5.packagekit-qt) # Package Updater
       ];
     };
 
