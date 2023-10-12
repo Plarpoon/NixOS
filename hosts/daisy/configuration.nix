@@ -1,5 +1,4 @@
 {
-
   ##FIX ME
   boot.loader.grub.devices = [ "nodev" ];
 
@@ -12,6 +11,9 @@
     enable = true;
   };
 
+  # kernel parameters
+  boot.kernelParams = [ "pcie_port_pm=off" "pcie_aspm.policy=performance" ];
+
   ## Users
   users.users = {
     plarpoon = {
@@ -23,7 +25,7 @@
       extraGroups = [
         "wheel"
         "networkmanager"
-      ]; # The user is part of the 'wheel' and 'networkmanager' groups
+      ];
     };
   };
 

@@ -1,5 +1,4 @@
 {
-
   ##FIX ME
   boot.loader.grub.devices = [ "nodev" ];
 
@@ -23,7 +22,7 @@
       extraGroups = [
         "wheel"
         "networkmanager"
-      ]; # The user is part of the 'wheel' and 'networkmanager' groups
+      ];
     };
   };
 
