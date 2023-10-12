@@ -43,8 +43,6 @@
     environment = {
       systemPackages = with pkgs; [
         # System-Wide Packages
-        latte-dock # KDE's dock replacement
-
         # Icon themes
         tela-icon-theme
 

@@ -51,6 +51,12 @@
       gimp-with-plugins # GNU Image Manipulation Program
       krita # Digital painting program
 
+      # Video player
+      vlc # video player
+
+      # Video ripper
+      makemkv # creates MKV out of DVD/BluRays
+
       # Windows translation layers
       wine-staging # Windows translation layer
       bottles # WINE and other translation layer manager in a sandbox

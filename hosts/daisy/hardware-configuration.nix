@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
@@ -14,24 +15,56 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/0714c76a-a39c-4819-9e6e-40de324f0607";
+    {
+      device = "/dev/disk/by-label/root";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0988-525D";
+    {
+      device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/214822bd-6727-4e1a-9a0a-f5202bba040b";
+    {
+      device = "/dev/disk/by-label/home";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/mnt/m2-pro" =
+    {
+      device = "/dev/disk/by-label/m2-pro";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/mnt/m2-pro-2" =
+    {
+      device = "/dev/disk/by-label/m2-pro-2";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/mnt/ssd-small" =
+    {
+      device = "/dev/disk/by-label/ssd-small";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/mnt/ssd-big" =
+    {
+      device = "/dev/disk/by-label/ssd-big";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/mnt/vault" =
+    {
+      device = "/dev/disk/by-label/vault";
       fsType = "btrfs";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/43d02e96-940c-4a5f-8629-f95f780c8106"; }
-    ];
+    [{ device = "/dev/disk/by-label/swap"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
