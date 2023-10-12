@@ -48,8 +48,8 @@
         # Define a NixOS configuration for the 'daisy' host
         daisy = nixpkgs.lib.nixosSystem {
           modules = [
-            # Import the 'bjorn' host's configuration.nix file
-            ./hosts/bjorn/configuration.nix
+            # Import the 'daisy' host's configuration.nix file
+            ./hosts/daisy/configuration.nix
             ./modules/nixos
             # Enable Home Manager
             home-manager.nixosModules.home-manager
