@@ -44,6 +44,7 @@
       systemPackages = with pkgs.libsForQt5; [
         # System-Wide Packages
         packagekit-qt # Package Updater
+        latte-dock # KDE's dock replacement
       ];
     };
 
