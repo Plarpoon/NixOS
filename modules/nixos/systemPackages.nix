@@ -28,6 +28,11 @@
       # Version Control
       git # Distributed VCS
 
+      # Programming
+      dotnet-sdk_7 # set of SDK tools and language compilers
+      dotnet-runtime_7 # .NET runtime
+      dotnet-aspnetcore_7 # ASP.NET Core
+
       # Shell
       zsh # Interactive shell
 
