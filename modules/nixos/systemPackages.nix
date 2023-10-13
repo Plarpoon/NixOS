@@ -46,7 +46,6 @@
       nixpkgs-fmt # Nix code formatter
 
       # Communication
-      discord # Discord client
       whatsapp-for-linux # WhatsApp client
 
       # Encryption
@@ -72,6 +71,9 @@
       VISUAL = "neovim";
     };
   };
+
+  ## Enable flatpak (only because of Bottles official support unfortunately)
+  services.flatpak.enable = true;
 
   ## Programs
   programs = {
