@@ -64,7 +64,8 @@
 
       # Windows translation layers
       wine-staging # Windows translation layer
-      bottles # WINE and other translation layer manager in a sandbox
+      winetricks # A script to install DLLs needed to work around problems in Wine
+      protontricks # A simple wrapper for running Winetricks commands for Proton-enabled games
     ];
     variables = {
       EDITOR = "neovim";
@@ -72,10 +73,15 @@
     };
   };
 
-  ## Steam
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  ## Programs
+  programs = {
+    gamemode.enable = true;
+
+    ## Steam
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
   };
 }
