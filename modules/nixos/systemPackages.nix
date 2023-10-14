@@ -1,10 +1,6 @@
-{ config
+{ pkgs
 , inputs
 , lib
-, pkgs
-, username
-, stateVersion
-, vars
 , ...
 }:
 
@@ -17,7 +13,7 @@
     # Add packages system-wide
     systemPackages = with pkgs; [
       ## Portals
-      xdg-desktop-portal-gtk  # Desktop integration portals for sandboxed apps
+      xdg-desktop-portal-gtk # Desktop integration portals for sandboxed apps
 
       # Browsers
       firefox # Open-source browser

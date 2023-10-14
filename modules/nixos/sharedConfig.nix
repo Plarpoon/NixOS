@@ -1,10 +1,6 @@
-{ config
+{ pkgs
 , inputs
 , lib
-, pkgs
-, username
-, stateVersion
-, vars
 , ...
 }:
 
