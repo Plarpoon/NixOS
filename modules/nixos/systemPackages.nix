@@ -73,7 +73,18 @@
   };
 
   ## Enable flatpak (only because of Bottles official support unfortunately)
-  services.flatpak.enable = true;
+  services = {
+    flatpak.enable = true;
+
+    cron = {
+      enable = true;
+
+      ## update flatpaks every 3 hours
+      systemCronJobs = [
+        "0 */3 * * * plarpoon flatpak update --noninteractive --assumeyes"
+      ];
+    };
+  };
 
   ## Programs
   programs = {
