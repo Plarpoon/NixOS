@@ -16,6 +16,9 @@
     defaultPackages = lib.mkForce [ ];
     # Add packages system-wide
     systemPackages = with pkgs; [
+      ## Portals
+      xdg-desktop-portal-gtk  # Desktop integration portals for sandboxed apps
+
       # Browsers
       firefox # Open-source browser
       microsoft-edge # Microsoft's browser
