@@ -68,6 +68,11 @@
       # OBS
       obs-studio # Streaming and recording software
       obs-studio-plugins.obs-vaapi # VAAPI-plugin for OBS
+
+      # Econders/Decoders
+      svt-av1
+      dav1d
+      rav1e
     ];
     variables = {
       EDITOR = "neovim";

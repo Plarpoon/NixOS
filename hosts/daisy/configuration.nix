@@ -1,3 +1,7 @@
+{ pkgs
+, ...
+}:
+
 {
   ##FIX ME
   boot.loader.grub.devices = [ "nodev" ];
@@ -11,8 +15,26 @@
     enable = true;
   };
 
-  # kernel parameters
+  ## Kernel parameters
   boot.kernelParams = [ "pcie_port_pm=off" "pcie_aspm.policy=performance" ];
+
+  ## OpenCL
+  hardware.opengl.extraPackages = with pkgs; [
+    rocmPackages.clr.icd
+    rocmPackages.clr
+    amdvlk
+  ];
+
+  ## Vulkan
+  hardware.opengl.driSupport = true;
+  # For 32 bit applications
+  hardware.opengl.driSupport32Bit = true;
+
+  # For 32 bit applications 
+  # Only available on unstable
+  hardware.opengl.extraPackages32 = with pkgs; [
+    driversi686Linux.amdvlk
+  ];
 
   ## Users
   users.users = {
