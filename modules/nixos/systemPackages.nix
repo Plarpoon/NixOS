@@ -64,6 +64,10 @@
       wine-staging # Windows translation layer
       winetricks # A script to install DLLs needed to work around problems in Wine
       protontricks # A simple wrapper for running Winetricks commands for Proton-enabled games
+
+      # OBS
+      obs-studio # Streaming and recording software
+      obs-studio-plugins.obs-vaapi # VAAPI-plugin for OBS
     ];
     variables = {
       EDITOR = "neovim";

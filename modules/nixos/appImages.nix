@@ -2,6 +2,9 @@
 , ...
 }:
 
+let
+  appimageTools = pkgs.appimageTools;
+in
 appimageTools.wrapType2 {
   # or wrapType1
   name = "wowup-cf";
