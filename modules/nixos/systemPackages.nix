@@ -14,6 +14,10 @@
     systemPackages = with pkgs; [
       ## Portals
       xdg-desktop-portal-gtk # Desktop integration portals for sandboxed apps
+      xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
+
+      ## Dictionary
+      nuspell
 
       # Browsers
       firefox # Open-source browser
@@ -75,8 +79,8 @@
       rav1e
     ];
     variables = {
-      EDITOR = "neovim";
-      VISUAL = "neovim";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
     };
   };
 
