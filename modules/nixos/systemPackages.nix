@@ -16,6 +16,12 @@
       xdg-desktop-portal-gtk # Desktop integration portals for sandboxed apps
       xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
 
+      ## SDK
+      android-tools
+
+      ## Torrent client
+      qbittorrent
+
       ## Dictionary
       nuspell
 
