@@ -1,6 +1,7 @@
 { pkgs
 , inputs
 , lib
+, config
 , ...
 }:
 
@@ -25,14 +26,17 @@
       ## Dictionary
       nuspell
 
+      ## Fonts
+      nerdfonts
+
       # Browsers
       firefox # Open-source browser
       microsoft-edge # Microsoft's browser
 
       # Editors
-      neovim # Vim-based editor
       vscode # Microsoft's editor
       kate # KDE's editor
+      libreoffice-fresh # LibreOffice but more frequently updated
 
       # Version Control
       git # Distributed VCS
@@ -41,9 +45,6 @@
       dotnet-sdk_7 # set of SDK tools and language compilers
       dotnet-runtime_7 # .NET runtime
       dotnet-aspnetcore_7 # ASP.NET Core
-
-      # Shell
-      zsh # Interactive shell
 
       # Disk Management
       gparted # Disk utility
@@ -113,6 +114,64 @@
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
+
+    ## Nix-index
+    nix-index = {
+      enableZshIntegration = true;
+    };
+
+    ## ZSH
+    zsh = {
+      enable = true;
+
+      ## Define aliases
+      shellAliases = {
+        ## ll = "ls -l";
+        ## update = "sudo nixos-rebuild switch";
+      };
+
+      ## Colored ls output
+      enableLsColors = true;
+
+      ## Configure Zsh history
+      histSize = 10000;
+      histFile = "$HOME/.zsh_history";
+
+      ## Enable autosuggestions
+      autosuggestions = {
+        enable = true;
+        async = true;
+      };
+
+      ## Enable completion
+      enableCompletion = true;
+
+      ## Enable syntax highlighting
+      syntaxHighlighting = {
+        enable = true;
+      };
+    };
+
+    ## Starship
+    starship = {
+      enable = true;
+    };
+
+    ## NeoVIM
+    neovim = {
+      enable = true;
+      configure = {
+        customRC = ''
+          " here your custom configuration goes!
+        '';
+        packages.myVimPackage = with pkgs.vimPlugins; {
+          # loaded on launch
+          start = [ nvchad ];
+          # manually loadable by calling `:packadd $plugin-name`
+          opt = [ ];
+        };
+      };
     };
   };
 }

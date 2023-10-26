@@ -55,7 +55,8 @@
         # SDDM theme
         catppuccin-sddm-corners
 
-        (pkgs.libsForQt5.packagekit-qt) # Package Updater
+        libsForQt5.packagekit-qt # Package Updater
+        libsForQt5.kcalc # Scientific Calculator
       ];
     };
 
