@@ -13,21 +13,24 @@
     defaultPackages = lib.mkForce [ ];
     # Add packages system-wide
     systemPackages = with pkgs; [
+      ## AppImages
+      appimage-run # Run appimages on NixOS
+
       ## Portals
       xdg-desktop-portal-gtk # Desktop integration portals for sandboxed apps
       xwaylandvideobridge # Utility to allow streaming Wayland windows to X applications
 
       ## SDK
-      android-tools
+      android-tools # Android SDK platform tools
 
       ## Torrent client
-      qbittorrent
+      qbittorrent # Featureful free software BitTorrent client
 
       ## Dictionary
-      nuspell
+      nuspell # Free and open source C++ spell checking library
 
       ## Fonts
-      nerdfonts
+      nerdfonts # Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts
 
       # Browsers
       firefox # Open-source browser
@@ -47,16 +50,17 @@
       dotnet-aspnetcore_7 # ASP.NET Core
 
       # Disk Management
-      gparted # Disk utility
+      gparted # Graphical disk partitioning tool
+      #etcher # Flash OS images to SD cards and USB drives, safely and easily
 
       # Environment Management
-      direnv # Env switcher
+      direnv # A shell extension that manages your environment
 
       # Nix Formatter
-      nixpkgs-fmt # Nix code formatter
+      nixpkgs-fmt # Nix code formatter for nixpkgs
 
       # Communication
-      whatsapp-for-linux # WhatsApp client
+      whatsapp-for-linux # Whatsapp desktop messaging app
 
       # Encryption
       gnupg # OpenPGP implementation
@@ -65,11 +69,14 @@
       gimp-with-plugins # GNU Image Manipulation Program
       krita # Digital painting program
 
+      # Rust Linux core utilities
+      ripgrep # A utility that combines the usability of The Silver Searcher with the raw speed of grep
+
       # Video player
-      vlc # video player
+      vlc # Cross-platform media player and streaming server
 
       # Video ripper
-      makemkv # creates MKV out of DVD/BluRays
+      makemkv # Convert blu-ray and dvd to mkv
 
       # Windows translation layers
       wine-staging # Windows translation layer
@@ -81,9 +88,9 @@
       obs-studio-plugins.obs-vaapi # VAAPI-plugin for OBS
 
       # Econders/Decoders
-      svt-av1
-      dav1d
-      rav1e
+      svt-av1 # AV1-compliant encoder/decoder library core
+      dav1d # A cross-platform AV1 decoder focused on speed and correctness
+      rav1e # The fastest and safest AV1 encoder
     ];
     variables = {
       EDITOR = "nvim";
@@ -161,17 +168,6 @@
     ## NeoVIM
     neovim = {
       enable = true;
-      configure = {
-        customRC = ''
-          " here your custom configuration goes!
-        '';
-        packages.myVimPackage = with pkgs.vimPlugins; {
-          # loaded on launch
-          start = [ nvchad ];
-          # manually loadable by calling `:packadd $plugin-name`
-          opt = [ ];
-        };
-      };
     };
   };
 }
